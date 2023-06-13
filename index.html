@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Calculator</title>
+    <style>
+.container {
+    
+    max-width:350px;
+    margin: 0 auto;
+    max-height: 300px;
+    
+}
+h1{
+    text-align: center;
+    font-size:35px;
+   
+}
+
+#display {
+    text-align: right;
+    height: 30px;
+    line-height: 70px;
+    padding: 16px 8px;
+    font-size: 25px;
+    border:2px solid black;
+}
+
+.buttons {
+    display: grid;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid#999;
+    grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr;
+    column-gap: 5px;
+    row-gap: 5px;
+}
+
+.buttons > div {
+    border-top: 1px solid #999;
+    border-right: 1px solid#999;
+    border-radius: 10px;
+    background-color: whitesmoke;
+}
+
+.val{
+    border: 0.5px solid #999;
+    line-height: 100px;
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#equal {
+    background-color: rgb(111 155 216);
+    color: white;
+}
+
+.val:hover {
+    background-color: rgb(85, 84, 84);
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <section>
+       
+        <div class="container">
+            <h1>Simple Calculator</h1>
+            <div id="display"></div><br>
+            <div class="buttons">
+                <div class="val">C</div>
+                <div class="val">/</div>
+                <div class="val">*</div>
+                <div class="val">&larr;</div>
+                <div class="val">7</div>
+                <div class="val">8</div>
+                <div class="val">9</div>
+                <div class="val">-</div>
+                <div class="val">4</div>
+                <div class="val">5</div>
+                <div class="val">6</div>
+                <div class="val">+</div>
+                <div class="val">1</div>
+                <div class="val">2</div>
+                <div class="val">3</div>
+                <div class="val">.</div>
+                <div class="val">(</div>
+                <div class="val">0</div>
+                <div class="val">)</div>
+                <div id="equal" class="val">=</div>
+            </div>
+        </div>
+    </section>
+    <script >
+        let display = document.getElementById('display');
+
+let buttons = Array.from(document.getElementsByClassName('val'));
+
+buttons.map( val => {
+    val.addEventListener('click', (e) => {
+        switch(e.target.innerText){
+            case 'C':
+                display.innerText = '';
+                break;
+            case '=':
+                try{
+                    display.innerText = eval(display.innerText);
+                } catch {
+                    display.innerText = "Error"
+                }
+                break;
+            case '←':
+                if (display.innerText){
+                   display.innerText = display.innerText.slice(0, -1);
+                }
+                break;
+            default:
+                display.innerText += e.target.innerText;
+        }
+    });
+});
+    </script>
+</body>
+</html>
